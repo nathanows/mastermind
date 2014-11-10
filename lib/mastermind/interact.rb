@@ -1,4 +1,5 @@
 require 'mastermind/play_game'
+require 'colorize'
 
 module Mastermind
   class Interact
@@ -22,12 +23,12 @@ ___       ___                                                                   
  M   YP   MM MM'   MM       `Mb  MM     MM        MM      MM    MM    MM  MM  MM    MM MM    MM 
  M   `'   MM MM.  ,MM  L    ,MM  YM.  , YM    d9  MM      MM    MM    MM  MM  MM    MM YM.  ,MM 
 _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM_  _MM_ YMMMMMM_
-      )
+      ).colorize(:green)
     end
 
     def print_intro
       stdout.puts
-      stdout.puts "&%&%&%&%&%&%&%&%&%&%&%&%&%&&%%&%%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%"
+      stdout.puts "&%&%&%&%&%&%&%&%&%&%&%&%&%&&%%&%%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%".colorize(:green)
       stdout.puts
       stdout.puts
       stdout.puts "                         #====================================#"

@@ -18,8 +18,10 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
+  spec.add_dependency "colorize"
+
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "guard", "~> 2.8.1"
-  spec.add_development_dependency "guard-rspec"
+  spec.add_development_dependency "guard", "~> 2.8"
+  spec.add_development_dependency "guard-rspec", "~> 4.3"
 end
