@@ -106,7 +106,7 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
 
     def print_are_you_sure
       stdout.puts
-      stdout.puts "Are you sure you want to quit? (y)es/(n)o"
+      stdout.puts "Are you sure you want to quit? (y)es/(n)o".colorize(:red)
     end
 
     def print_invalid_guess(invalid_command)
@@ -115,7 +115,7 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
 
     def print_guess_stats(number_guesses, correct_pos, correct_color, guess, max_guesses)
       stdout.puts
-      stdout.puts "Guess ##{number_guesses} (#{guess}): #{max_guesses - number_guesses} guesses remaining"
+      stdout.puts "Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining"
       stdout.puts "Correct position: #{correct_pos}   Correct colors: #{correct_color}"
       stdout.puts
       stdout.puts "Nope... let's try that again"
@@ -124,9 +124,20 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
 
     def print_win(number_guesses)
       stdout.puts
-      stdout.puts "                  ******************************************************"
-      stdout.puts "                    Congraulations! YOU WIN! Code broken in #{number_guesses} guesses"
-      stdout.puts "                  ******************************************************"
+      stdout.puts "                  ******************************************************".colorize(:green)
+      stdout.puts "                    Congraulations! YOU WIN! Code broken in #{number_guesses} guesses".colorize(:green)
+      stdout.puts "                  ******************************************************".colorize(:green)
+    end
+
+    def color_guess(code)
+      input = code.kind_of?(Array) ? code : code.chars
+      colored = []
+      input.map { |char| colored << char.colorize(color_code(char)) }
+      colored.join("")
+    end
+
+    def color_code(letter)
+      Mastermind::COLOR_CODES[letter]
     end
   end
 end
