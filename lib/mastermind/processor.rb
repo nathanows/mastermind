@@ -30,11 +30,13 @@ module Mastermind
     end
 
     def self.num_correct_colors(guess, code)
-      match = guess.chars.map.with_index {|char, i| guess[i] == code[i] }
-      table = guess.chars.zip(code, match)
-      results = table.map { |x| table.map { |y| y[2] == false && x[0] == y[1] } }
-      correct = results.map { |rec| rec.any? { |stmt| stmt == true } }
-      correct.count(true)
+      non_posd = code.select.with_index { |letter, i| letter != guess[i] }
+      colors = []
+      guess.chars.map do |letter|
+        idx = non_posd.find_index { |char| letter == char }
+        colors << non_posd.delete_at(idx) if idx
+      end
+      colors.length
     end
 
     def self.num_correct_pos(guess, code)
