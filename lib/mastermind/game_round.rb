@@ -12,7 +12,8 @@ module Mastermind
                   :max_guesses,
                   :instream,
                   :outstream,
-                  :interact
+                  :interact,
+                  :start_time
 
     def initialize(instream, outstream, interact)
       @instream     = instream
@@ -23,7 +24,8 @@ module Mastermind
       @max_guesses  = 12
       @command      = ""
       @guesses      = []
-      @round_over    = false
+      @round_over   = false
+      @start_time   = Time.now
     end
 
     def play
@@ -53,7 +55,8 @@ module Mastermind
     end
 
     def win!
-      outstream.puts interact.print_win(num_guesses)
+      time = Time.now - start_time
+      outstream.puts interact.print_win(num_guesses, time.round)
       round_over!
     end
 

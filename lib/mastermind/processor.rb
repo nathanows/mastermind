@@ -5,7 +5,7 @@ module Mastermind
     def self.secret(length, num_colors)
       secret = []
       length.times do
-        secret << Mastermind::COLORS.first(num_colors).sample
+        secret << colors(num_colors).sample
       end
       secret
     end

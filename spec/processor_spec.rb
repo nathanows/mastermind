@@ -1,6 +1,16 @@
 require 'mastermind/processor'
 
 RSpec.describe Mastermind::Processor do
+  it "generates a random 4 char secret code" do
+    secret = Mastermind::Processor.secret(4, 6)
+    expect(secret.length).to eql(4)
+    expect(Mastermind::Processor.valid_colors?(secret.join(""), Mastermind::Processor.colors(6))).to be_truthy
+  end
+
+  it "can pull the first x numbers" do
+    expect(Mastermind::Processor.colors(3)).to eql(["R", "Y", "G"])
+  end
+
   context "when validating a guess" do
     it "validates that a correct length guess is valid" do
       valid_length = Mastermind::Processor.valid_length?("RBBY", ["R", "G", "R", "R"])

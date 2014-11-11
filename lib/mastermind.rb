@@ -24,4 +24,5 @@ module Mastermind
   def self.color_option_string(num_colors)
     COLOR_NAMES.values.first(num_colors).join(" | ")
   end
+
 end

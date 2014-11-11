@@ -99,7 +99,7 @@ A random code consisting of 4 colors has been generated for you.
 The valid color options are:
 #{colors}
 
-Enter your guess in the form of 'RGBY':
+Enter your guess in the form of '#{color_guess("RGBY")}':
 ------------------------------
       "
     end
@@ -130,10 +130,11 @@ Nope... let's try that again
 ------------------------------"
     end
 
-    def print_win(number_guesses)
+    def print_win(number_guesses, time)
       "
                   *******************************************************
                      Congraulations! YOU WIN! Code broken in #{number_guesses} guesses
+                            You guessed the code in #{time} seconds!
                   *******************************************************".colorize(:green)
     end
 
