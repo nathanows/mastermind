@@ -46,6 +46,24 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
       blank_line
     end
 
+
+    def print_game_options
+      line_break +
+      blank_line +
+      "
+                          #====================================#
+                          #        MASTERMIND GAME OPTS        #
+                          #------------------------------------#
+                          #                                    #
+                          #          (s)ingle player           #
+                          #          (m)ulti player            #
+                          #          (q)uit                    #
+                          #                                    #
+                          #====================================#
+      " +
+      blank_line
+    end
+
     def command_prompt
       "Enter command: "
     end
@@ -90,6 +108,14 @@ These are the instructions.
 
     def print_game_info
       ""
+    end
+
+    def print_player_intro
+      "Player(s) need to enter their name."
+    end
+
+    def name_prompt(player_no)
+      "Player #{player_no} Name: "
     end
 
     def print_round_intro(colors)

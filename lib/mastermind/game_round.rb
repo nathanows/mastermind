@@ -15,7 +15,7 @@ module Mastermind
                   :interact,
                   :start_time
 
-    def initialize(instream, outstream, interact)
+    def initialize(instream, outstream, interact, players)
       @instream     = instream
       @outstream    = outstream
       @interact     = interact
@@ -26,6 +26,7 @@ module Mastermind
       @guesses      = []
       @round_over   = false
       @start_time   = Time.now
+      @players      = []
     end
 
     def play
