@@ -118,6 +118,19 @@ These are the instructions.
       "Player #{player_no} Name: "
     end
 
+    def print_player_secret_intro(player_name)
+      "#{player_name} - Pick the secret code for your opponent"
+    end
+
+    def secret_guess_prompt
+      "Enter secret code: "
+    end
+
+    def print_get_secret
+      "Time to create some secrets. Each player will create the secret
+      That their opponent will be guessing."
+    end
+
     def print_round_intro(colors)
       "
 A random code consisting of 4 colors has been generated for you.
