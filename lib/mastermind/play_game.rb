@@ -3,17 +3,19 @@ require 'mastermind/game_round'
 
 module Mastermind
   class PlayGame
-    attr_accessor :interact
+    attr_accessor :interact, :instream, :outstream
 
-    def initialize
-      self.interact = Mastermind::Interact.new($stdin, $stdout)
+    def initialize(instream, outstream, interact)
+      @instream  = instream
+      @outstream = outstream
+      @interact  = interact
     end
 
     def run
-      interact.print_game_info
-      round = Mastermind::GameRound.new
+      outstream.puts interact.print_game_info
+      round = Mastermind::GameRound.new(instream, outstream, interact)
       round.play
-      interact.print_intro
+      outstream.puts interact.print_intro
     end
   end
 end

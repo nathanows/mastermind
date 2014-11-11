@@ -9,22 +9,28 @@ module Mastermind
                   :command,
                   :guesses,
                   :round_over,
-                  :max_guesses
+                  :max_guesses,
+                  :instream,
+                  :outstream,
+                  :interact
 
-    def initialize
-      self.secret       = Mastermind::Processor.secret(4, 6)
-      self.interact     = Mastermind::Interact.new($stdin, $stdout)
-      self.valid_colors = Mastermind::Processor.colors(6)
-      self.max_guesses  = 12
-      self.command      = ""
-      self.guesses      = []
-      self.round_over    = false
+    def initialize(instream, outstream, interact)
+      @instream     = instream
+      @outstream    = outstream
+      @interact     = interact
+      @secret       = Mastermind::Processor.secret(4, 6)
+      @valid_colors = Mastermind::Processor.colors(6)
+      @max_guesses  = 12
+      @command      = ""
+      @guesses      = []
+      @round_over    = false
     end
 
     def play
-      interact.print_round_intro(color_string)
+      outstream.puts interact.print_round_intro(color_string)
       until quit? || round_over
-        self.command = interact.get_guess
+        outstream.print interact.guess_prompt
+        self.command = instream.gets.strip.upcase
         process_command
       end
     end
@@ -32,7 +38,7 @@ module Mastermind
     def process_command
       case
       when quit?          then quit_confirm
-      when !valid_guess?  then interact.print_invalid_guess(command)
+      when !valid_guess?  then outstream.puts interact.print_invalid_guess(command)
       when valid_guess?   then guess
       end
     end
@@ -43,11 +49,11 @@ module Mastermind
 
     def round_over!
       self.round_over = true
-      interact.print_round_over
+      outstream.puts interact.print_round_over
     end
 
     def win!
-      interact.print_win(num_guesses)
+      outstream.puts interact.print_win(num_guesses)
       round_over!
     end
 
@@ -64,7 +70,7 @@ module Mastermind
     end
 
     def out_of_guesses
-      interact.print_out_of_guesses(secret)
+      outstream.puts interact.print_out_of_guesses(secret)
       round_over!
     end
 
@@ -72,7 +78,7 @@ module Mastermind
       guesses << command
       if    correct_guess?      then win!
       elsif !guesses_remaining? then out_of_guesses
-      else  interact.print_guess_stats(num_guesses, correct_pos, correct_color, command, max_guesses)
+      else  outstream.puts interact.print_guess_stats(num_guesses, correct_pos, correct_color, command, max_guesses)
       end
     end
 
@@ -93,8 +99,9 @@ module Mastermind
     end
 
     def quit_confirm
-      interact.print_are_you_sure
-      confirmation = interact.get_input
+      outstream.puts interact.print_are_you_sure
+      outstream.print interact.command_prompt
+      confirmation = instream.gets.strip.upcase
       case confirmation
       when "Y", "YES" then self.command = "Q"
       else                 self.command = ""

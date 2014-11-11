@@ -3,15 +3,8 @@ require 'colorize'
 
 module Mastermind
   class Interact
-    attr_accessor :stdin, :stdout
-
-    def initialize(stdin, stdout)
-      self.stdin = stdin
-      self.stdout = stdout
-    end
-
     def print_title
-      stdout.puts %q(
+      %q(
 ___       ___                                                                               ___ 
 `MMb     dMM'                                                            68b                `MM 
  MMM.   ,PMM                      /                                      Y89                 MM 
@@ -26,107 +19,122 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
       ).colorize(:green)
     end
 
-    def print_intro
-      stdout.puts
-      stdout.puts "&%&%&%&%&%&%&%&%&%&%&%&%&%&&%%&%%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%".colorize(:green)
-      stdout.puts
-      stdout.puts
-      stdout.puts "                         #====================================#"
-      stdout.puts "                         #        MASTERMIND MAIN MENU        #"
-      stdout.puts "                         #------------------------------------#"
-      stdout.puts "                         #                                    #"
-      stdout.puts "                         #          (i)nstructions            #"
-      stdout.puts "                         #          (p)lay the game           #"
-      stdout.puts "                         #          (q)uit                    #"
-      stdout.puts "                         #                                    #"
-      stdout.puts "                         #====================================#"
-      stdout.puts
+    def line_break
+      "
+&%&%&%&%&%&%&%&%&%&%&%&%&%&&%%&%%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%
+      ".colorize(:green)
     end
 
-    def get_input
-      stdout.print "Enter command: "
-      stdin.gets.chomp.upcase
+    def blank_line
+      "\n"
+    end
+
+    def print_intro
+      line_break +
+      blank_line +
+      "
+                          #====================================#
+                          #        MASTERMIND MAIN MENU        #
+                          #------------------------------------#
+                          #                                    #
+                          #          (i)nstructions            #
+                          #          (p)lay the game           #
+                          #          (q)uit                    #
+                          #                                    #
+                          #====================================#
+      " +
+      blank_line
+    end
+
+    def command_prompt
+      "Enter command: "
     end
 
     def screen_clear
-      stdout.puts "\e[H\e[2J"
+      "\e[H\e[2J"
     end
 
-    def get_guess
-      stdout.print "Enter guess: "
-      stdin.gets.chomp.upcase
+    def guess_prompt
+      "Enter guess: "
     end
 
     def print_invalid(input)
-      stdout.print "'#{input}' is not a valid command, please enter a valid command."
+      "
+'#{input}' is not a valid command, please enter a valid command.
+      "
     end
 
     def print_out_of_guesses(secret)
-      stdout.puts
-      stdout.puts
-      stdout.puts "                  *****************************************************"
-      stdout.puts "                          Nope, sorry, you are out of guesses."
-      stdout.puts "                                      Nice try."
-      stdout.puts "                                The secret code was:"
-      stdout.puts "                                       #{secret.join(" ")}"
-      stdout.puts "                  *****************************************************"
+      "
+
+                  *****************************************************
+                          Nope, sorry, you are out of guesses.
+                                      Nice try.
+                                The secret code was:
+                                         #{color_guess(secret)}
+                  *****************************************************
+      "
     end
 
     def print_farewell
-      stdout.puts
-      stdout.puts "Thanks for playing"
-      stdout.puts
+      "
+Thanks for playing
+      "
     end
 
     def print_instructions
-      stdout.puts "These are the instructions."
+      "
+These are the instructions.
+      "
     end
 
     def print_game_info
-      stdout.puts ""
+      ""
     end
 
     def print_round_intro(colors)
-      stdout.puts "A random code consisting of 4 colors has been generated for you.\n"
-      stdout.puts
-      stdout.puts "The valid color options are:"
-      stdout.puts "#{colors}"
-      stdout.puts
-      stdout.puts "Enter your guess in the form of 'RGBY':"
-      stdout.puts "------------------------------"
+      "
+A random code consisting of 4 colors has been generated for you.
+
+The valid color options are:
+#{colors}
+
+Enter your guess in the form of 'RGBY':
+------------------------------
+      "
     end
 
     def print_round_over
-      stdout.puts
-      stdout.puts "                         **************************************"
-      stdout.puts "                         *             Round over             *"
-      stdout.puts "                         **************************************"
-      stdout.puts
+      "
+                          **************************************
+                          *             Round over             *
+                          **************************************
+      "
     end
 
     def print_are_you_sure
-      stdout.puts
-      stdout.puts "Are you sure you want to quit? (y)es/(n)o".colorize(:red)
+      "
+Are you sure you want to quit? (y)es/(n)o".colorize(:red)
     end
 
     def print_invalid_guess(invalid_command)
-      stdout.puts "'#{invalid_command}' is not a valid guess, please guess again."
+"'#{invalid_command}' is not a valid guess, please guess again."
     end
 
     def print_guess_stats(number_guesses, correct_pos, correct_color, guess, max_guesses)
-      stdout.puts
-      stdout.puts "Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining"
-      stdout.puts "Correct position: #{correct_pos}   Correct colors: #{correct_color}"
-      stdout.puts
-      stdout.puts "Nope... let's try that again"
-      stdout.puts "------------------------------"
+      "
+Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining
+Correct position: #{correct_pos}   Correct colors: #{correct_color}
+
+Nope... let's try that again
+------------------------------"
     end
 
     def print_win(number_guesses)
-      stdout.puts
-      stdout.puts "                  ******************************************************".colorize(:green)
-      stdout.puts "                    Congraulations! YOU WIN! Code broken in #{number_guesses} guesses".colorize(:green)
-      stdout.puts "                  ******************************************************".colorize(:green)
+      "
+                  *******************************************************
+                     Congraulations! YOU WIN! Code broken in #{number_guesses} guesses
+                  *******************************************************".colorize(:green)
     end
 
     def color_guess(code)

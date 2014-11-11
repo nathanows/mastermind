@@ -2,19 +2,20 @@ require 'mastermind/interact'
 
 module Mastermind
   class CLI
-    attr_accessor :command, :game
-    attr_reader :interact
+    attr_accessor :command
+    attr_reader :interact, :instream, :outstream, :game
 
-    def initialize
-      self.command = ""
-      @interact = Mastermind::Interact.new($stdin, $stdout)
-      @game = Mastermind::PlayGame.new
+    def initialize(instream, outstream)
+      @instream  = instream
+      @outstream = outstream
+      @command   = ""
+      @interact  = Mastermind::Interact.new
     end
 
     def run
-      interact.screen_clear
-      interact.print_title
-      interact.print_intro
+      outstream.puts interact.screen_clear
+      outstream.puts interact.print_title
+      outstream.puts interact.print_intro
       until quit?
         get_command
         process_command
@@ -22,15 +23,16 @@ module Mastermind
     end
 
     def get_command
-      self.command = interact.get_input
+      outstream.print interact.command_prompt
+      self.command = instream.gets.strip.upcase
     end
 
     def process_command
       case
-      when quit?         then interact.print_farewell
-      when instructions? then interact.print_instructions
-      when play?         then game.run
-      else                    puts interact.print_invalid(command)
+      when quit?         then outstream.puts interact.print_farewell
+      when instructions? then outstream.puts interact.print_instructions
+      when play?         then Mastermind::PlayGame.new(instream, outstream, interact).run
+      else                    outstream.puts interact.print_invalid(command)
       end
     end
 
