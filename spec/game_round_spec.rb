@@ -7,7 +7,7 @@ RSpec.describe Mastermind::GameRound do
     instream = StringIO.new
     outstream = StringIO.new
     interact = Mastermind::Interact.new
-    @game = Mastermind::GameRound.new(instream, outstream, interact)
+    @game = Mastermind::GameRound.new(instream, outstream, interact, players)
   end
 
   it "should load a secret" do

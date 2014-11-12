@@ -31,6 +31,7 @@ module Mastermind
         Mastermind::GameRound.new(instream, outstream, interact, players).play
       when command == "M"
         players = player_gen(2)
+        Mastermind::GameRound.new(instream, outstream, interact, players).play
       end
       self.command = "Q"
     end
@@ -51,6 +52,7 @@ module Mastermind
         outstream.print interact.name_prompt(player_no)
         name = instream.gets.strip
       end
+      name
     end
 
     def valid_name?(name)

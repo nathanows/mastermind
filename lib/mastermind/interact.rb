@@ -72,8 +72,9 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
       "\e[H\e[2J"
     end
 
-    def guess_prompt
-      "Enter guess: "
+    def guess_prompt(player)
+      "
+#{player.name} - Enter your guess: "
     end
 
     def print_invalid(input)
@@ -119,7 +120,8 @@ These are the instructions.
     end
 
     def print_player_secret_intro(player_name)
-      "#{player_name} - Pick the secret code for your opponent"
+      "
+#{player_name} - Pick the secret code for your opponent"
     end
 
     def secret_guess_prompt
@@ -128,7 +130,7 @@ These are the instructions.
 
     def print_get_secret
       "Time to create some secrets. Each player will create the secret
-      That their opponent will be guessing."
+That their opponent will be guessing."
     end
 
     def print_round_intro(colors)
@@ -160,12 +162,12 @@ Are you sure you want to quit? (y)es/(n)o".colorize(:red)
 "'#{invalid_command}' is not a valid guess, please guess again."
     end
 
-    def print_guess_stats(number_guesses, correct_pos, correct_color, guess, max_guesses)
+    def print_guess_stats(number_guesses, correct_pos, correct_color, guess, max_guesses, player)
       "
 Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining
 Correct position: #{correct_pos}   Correct colors: #{correct_color}
 
-Nope... let's try that again
+Nope... sorry #{player.name} let's try that again
 ------------------------------"
     end
 

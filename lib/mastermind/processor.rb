@@ -1,4 +1,5 @@
 require 'mastermind'
+require 'pry'
 
 module Mastermind
   class Processor
