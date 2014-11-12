@@ -35,11 +35,9 @@ module Mastermind
       outstream.puts interact.print_round_intro(color_string)
       secret_gen
       set_turn_pos
-      require 'pry'
-      binding.pry
       until quit?(@players.first) || quit?(@players.last) || round_over?
         @players.each do |player|
-          if player.round_over == false
+          if player.round_over == false && round_over == false
             outstream.print interact.guess_prompt(player)
             player.command = instream.gets.strip.upcase
             process_command(player)
@@ -88,7 +86,7 @@ module Mastermind
 
     def process_command(player)
       case
-      when quit?(player)                  then quit_confirm(player)
+      when quit?(player)                                               then quit_confirm(player)
       when !valid_guess?(player.command, player.secret, valid_colors)  then outstream.puts interact.print_invalid_guess(player.command)
       when valid_guess?(player.command, player.secret, valid_colors)   then guess(player)
       end
@@ -109,6 +107,10 @@ module Mastermind
 
     def round_over?
       !@players.any? {|player| player.round_over == false}
+    end
+
+    def game_round_over?
+      round_over
     end
 
     def win!(player)
@@ -164,7 +166,9 @@ module Mastermind
       outstream.print interact.command_prompt
       confirmation = instream.gets.strip.upcase
       case confirmation
-      when "Y", "YES" then player.command = "Q"
+      when "Y", "YES" 
+        self.round_over = true
+        player.command = "Q"
       else                 player.command = ""
       end
     end
