@@ -1,7 +1,7 @@
 module Mastermind
   class Player
     attr_reader :name
-    attr_accessor :secret, :command, :guesses, :round_over, :start_time, :completion_time
+    attr_accessor :secret, :command, :guesses, :round_over, :start_time, :completion_time, :turn_pos
 
     def initialize(name)
       @secret     = ["X", "X", "X", "X"]
@@ -11,6 +11,7 @@ module Mastermind
       @command    = ""
       @start_time = nil
       @completion_time = nil
+      @turn_pos   = nil
     end
   end
 end

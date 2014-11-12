@@ -34,6 +34,9 @@ module Mastermind
       player_reset
       outstream.puts interact.print_round_intro(color_string)
       secret_gen
+      set_turn_pos
+      require 'pry'
+      binding.pry
       until quit?(@players.first) || quit?(@players.last) || round_over?
         @players.each do |player|
           if player.round_over == false
@@ -52,6 +55,7 @@ module Mastermind
         player.guesses = []
         player.start_time = Time.now
         player.completion_time = nil
+        player.turn_pos = nil
       end
     end
 
@@ -75,6 +79,11 @@ module Mastermind
         outstream.puts
       end
       code.chars
+    end
+
+    def set_turn_pos
+      @players[0].turn_pos = 0
+      @players[1].turn_pos = 1 if @players[1]
     end
 
     def process_command(player)
