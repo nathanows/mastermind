@@ -35,14 +35,9 @@ module Mastermind
       outstream.puts interact.print_round_intro(color_string)
       secret_gen
       set_turn_pos
-      until quit?(@players.first) || quit?(@players.last) || round_over?
-        @players.each do |player|
-          if player.round_over == false && round_over == false
-            outstream.print interact.guess_prompt(player)
-            player.command = instream.gets.strip.upcase
-            process_command(player)
-          end
-        end
+      outstream.puts interact.multi_player_div if !single_player?
+      until round_over? || game_round_over?
+        player_turn
       end
     end
 
@@ -54,6 +49,16 @@ module Mastermind
         player.start_time = Time.now
         player.completion_time = nil
         player.turn_pos = nil
+      end
+    end
+
+    def player_turn
+      @players.each do |player|
+        if player.round_over == false && !game_round_over?
+          outstream.print interact.guess_prompt(player)
+          player.command = instream.gets.strip.upcase
+          process_command(player)
+        end
       end
     end
 

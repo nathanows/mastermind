@@ -72,9 +72,19 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
       "\e[H\e[2J"
     end
 
+    def multi_player_div
+      "Player 1                                                                   Player 2\n"+
+      "==================================================================================="
+    end
+
     def guess_prompt(player)
-      "
-#{player.name} - Enter your guess: "
+      if player.turn_pos == 0
+      "\n"+
+      "#{player.name} - Enter your guess: "
+      else
+      "\n"+
+      "                                            #{player.name} - Enter your guess:"
+      end
     end
 
     def print_invalid(input)
@@ -163,12 +173,21 @@ Are you sure you want to quit? (y)es/(n)o".colorize(:red)
     end
 
     def print_guess_stats(number_guesses, correct_pos, correct_color, guess, max_guesses, player)
-      "
-Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining
-Correct position: #{correct_pos}   Correct colors: #{correct_color}
-
-Nope... sorry #{player.name} let's try that again
-------------------------------"
+      if player.turn_pos == 0
+      "\n"+
+      "Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining\n"+
+      "Correct position: #{correct_pos}   Correct colors: #{correct_color}\n"+
+      "\n"+
+      "Nope... sorry #{player.name} let's try that again\n"+
+      "------------------------------\n"
+      else
+      "\n"+
+      "                                            Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining\n"+
+      "                                            Correct position: #{correct_pos}   Correct colors: #{correct_color}\n"+
+      "\n"+
+      "                                            Nope... sorry #{player.name} let's try that again\n"+
+      "                                            ------------------------------\n"
+      end
     end
 
     def print_win(number_guesses, time)
