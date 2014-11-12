@@ -31,11 +31,12 @@ module Mastermind
     end
 
     def self.num_correct_colors(guess, code)
-      non_posd = code.select.with_index { |letter, i| letter != guess[i] }
+      non_posd_guess = guess.chars.select.with_index { |letter, i| letter != code[i] }
+      non_posd_code = code.select.with_index { |letter, i| letter != guess.chars[i] }
       colors = []
-      guess.chars.map do |letter|
-        idx = non_posd.find_index { |char| letter == char }
-        colors << non_posd.delete_at(idx) if idx
+      non_posd_guess.map do |letter|
+        idx = non_posd_code.find_index { |char| letter == char }
+        colors << non_posd_code.delete_at(idx) if idx
       end
       colors.length
     end

@@ -49,6 +49,11 @@ RSpec.describe Mastermind::Processor do
       expect(colors).to eql(2)
     end
 
+    it "checks correct_colors again..." do
+      colors = Mastermind::Processor.num_correct_colors("RRBB", ["R", "R", "R", "R"])
+      expect(colors).to eql(0)
+    end
+
     it "checks how many colors are in the correct position" do
       positions = Mastermind::Processor.num_correct_pos("RGYM", ["R", "M", "G", "M"])
       expect(positions).to eql(2)

@@ -19,7 +19,6 @@ module Mastermind
       @instream     = instream
       @outstream    = outstream
       @interact     = interact
-      @secret       = Mastermind::Processor.secret(4, 6)
       @player1_secret = nil
       @player2_secret = nil
       @valid_colors = Mastermind::Processor.colors(6)
