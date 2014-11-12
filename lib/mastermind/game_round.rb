@@ -22,7 +22,7 @@ module Mastermind
       @player1_secret = nil
       @player2_secret = nil
       @valid_colors = Mastermind::Processor.colors(6)
-      @max_guesses  = 12
+      @max_guesses  = 2
       @command      = ""
       @guesses      = []
       @round_over   = false
@@ -78,7 +78,6 @@ module Mastermind
       until valid_guess?(code, player.secret, valid_colors)
         outstream.print interact.secret_guess_prompt
         code = instream.noecho(&:gets).strip.upcase
-        outstream.puts code
         outstream.puts
       end
       code.chars
@@ -107,7 +106,7 @@ module Mastermind
 
     def player_round_over!(player)
       player.round_over = true
-      outstream.puts interact.print_round_over
+      outstream.puts interact.print_round_over if round_over?
     end
 
     def round_over?
@@ -121,7 +120,7 @@ module Mastermind
     def win!(player)
       time = Time.now - player.start_time
       player.completion_time = time
-      outstream.puts interact.print_win(num_guesses(player), time.round)
+      outstream.puts interact.print_win(num_guesses(player), time.round, player.secret, player)
       player_round_over!(player)
     end
 
@@ -137,15 +136,15 @@ module Mastermind
       player.command == "Q" || player.command == "QUIT"
     end
 
-    def out_of_guesses
-      outstream.puts interact.print_out_of_guesses(secret)
-      round_over!
+    def out_of_guesses(player)
+      outstream.puts interact.print_out_of_guesses(num_guesses(player), correct_pos(player), correct_color(player), player.command, max_guesses, player)
+      player_round_over!(player)
     end
 
     def guess(player)
       player.guesses << player.command
       if    correct_guess?(player)      then win!(player)
-      elsif !guesses_remaining?(player) then out_of_guesses
+      elsif !guesses_remaining?(player) then out_of_guesses(player)
       else  outstream.puts interact.print_guess_stats(num_guesses(player), correct_pos(player), correct_color(player), player.command, max_guesses, player)
       end
     end

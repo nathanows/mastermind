@@ -5,23 +5,17 @@ module Mastermind
   class Interact
     def print_title
       %q(
-___       ___                                                                               ___ 
-`MMb     dMM'                                                            68b                `MM 
- MMM.   ,PMM                      /                                      Y89                 MM 
- M`Mb   d'MM    ___      ____    /M       ____   ___  __ ___  __    __   ___ ___  __     ____MM 
- M YM. ,P MM  6MMMMb    6MMMMb\ /MMMMM   6MMMMb  `MM 6MM `MM 6MMb  6MMb  `MM `MM 6MMb   6MMMMMM 
- M `Mb d' MM 8M'  `Mb  MM'    `  MM     6M'  `Mb  MM69 "  MM69 `MM69 `Mb  MM  MMM9 `Mb 6M'  `MM 
- M  YM.P  MM     ,oMM  YM.       MM     MM    MM  MM'     MM'   MM'   MM  MM  MM'   MM MM    MM 
- M  `Mb'  MM ,6MM9'MM   YMMMMb   MM     MMMMMMMM  MM      MM    MM    MM  MM  MM    MM MM    MM 
- M   YP   MM MM'   MM       `Mb  MM     MM        MM      MM    MM    MM  MM  MM    MM MM    MM 
- M   `'   MM MM.  ,MM  L    ,MM  YM.  , YM    d9  MM      MM    MM    MM  MM  MM    MM YM.  ,MM 
-_M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM_  _MM_ YMMMMMM_
+    _/      _/                        _/                                          _/                  _/
+   _/_/  _/_/    _/_/_/    _/_/_/  _/_/_/_/    _/_/    _/  _/_/  _/_/_/  _/_/        _/_/_/      _/_/_/
+  _/  _/  _/  _/    _/  _/_/        _/      _/_/_/_/  _/_/      _/    _/    _/  _/  _/    _/  _/    _/
+ _/      _/  _/    _/      _/_/    _/      _/        _/        _/    _/    _/  _/  _/    _/  _/    _/
+_/      _/    _/_/_/  _/_/_/        _/_/    _/_/_/  _/        _/    _/    _/  _/  _/    _/    _/_/_/
       ).colorize(:green)
     end
 
     def line_break
       "
-&%&%&%&%&%&%&%&%&%&%&%&%&%&&%%&%%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%&%
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
       ".colorize(:green)
     end
 
@@ -33,16 +27,16 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
       line_break +
       blank_line +
       "
-                          #====================================#
-                          #        MASTERMIND MAIN MENU        #
-                          #------------------------------------#
-                          #                                    #
-                          #          (i)nstructions            #
-                          #          (p)lay the game           #
-                          #          (q)uit                    #
-                          #                                    #
-                          #====================================#
-      " +
+                           ====================================
+                          |        M4573RM1ND MA1N M3NV        |
+                          | ---------------------------------- |
+                          |                                    |
+                          |          (i)NStRUCti0nZ            |
+                          |          (p)1aY the g4M3           |
+                          |          (q)V1t                    |
+                          |                                    |
+                           ====================================
+      ".colorize(:green) +
       blank_line
     end
 
@@ -51,16 +45,16 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
       line_break +
       blank_line +
       "
-                          #====================================#
-                          #        MASTERMIND GAME OPTS        #
-                          #------------------------------------#
-                          #                                    #
-                          #          (s)ingle player           #
-                          #          (m)ulti player            #
-                          #          (q)uit                    #
-                          #                                    #
-                          #====================================#
-      " +
+                           ====================================
+                          |        M4573RM1ND 9AM3 0PTZ        |
+                          |------------------------------------|
+                          |                                    |
+                          |          (s)1nG1e pl4y0r           |
+                          |          (m)u171 pl4y0r            |
+                          |          (q)V1t                    |
+                          |                                    |
+                           ====================================
+      ".colorize(:green) +
       blank_line
     end
 
@@ -73,7 +67,8 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
     end
 
     def multi_player_div
-      "Player 1                                                                   Player 2\n"+
+      "\n"+
+      "Player 1                                    Player 2\n"+
       "==================================================================================="
     end
 
@@ -83,7 +78,7 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
       "#{player.name} - Enter your guess: "
       else
       "\n"+
-      "                                            #{player.name} - Enter your guess:"
+      "                                            #{player.name} - Enter your guess: "
       end
     end
 
@@ -93,16 +88,28 @@ _M_      _MM_`YMMM9'Yb.MYMMMM9    YMMM9  YMMMM9  _MM_    _MM_  _MM_  _MM__MM__MM
       "
     end
 
-    def print_out_of_guesses(secret)
-      "
-
-                  *****************************************************
-                          Nope, sorry, you are out of guesses.
-                                      Nice try.
-                                The secret code was:
-                                         #{color_guess(secret)}
-                  *****************************************************
-      "
+    def print_out_of_guesses(number_guesses, correct_pos, correct_color, guess, max_guesses, player)
+      if player.turn_pos == 0
+      "\n"+
+      "----------------------------------------\n"+
+      "Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining\n"+
+      "Correct position: #{correct_pos}   Correct colors: #{correct_color}\n"+
+      "\n"+
+      "Nope... sorry #{player.name}, that was your last\n"+
+      "guess and you still didn't get it right....\n"+
+      "The secret code was: #{color_guess(player.secret)}\n"+
+      "----------------------------------------\n"
+      else
+      "\n"+
+      "                                            ----------------------------------------\n"+
+      "                                            Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining\n"+
+      "                                            Correct position: #{correct_pos}   Correct colors: #{correct_color}\n"+
+      "\n"+
+      "                                            Nope... sorry #{player.name}, that was your last\n"+
+      "                                            guess and you still didn't get it right....\n"+
+      "                                            The secret code was: #{color_guess(player.secret)}\n"+
+      "                                            ----------------------------------------\n"
+      end
     end
 
     def print_farewell
@@ -175,27 +182,43 @@ Are you sure you want to quit? (y)es/(n)o".colorize(:red)
     def print_guess_stats(number_guesses, correct_pos, correct_color, guess, max_guesses, player)
       if player.turn_pos == 0
       "\n"+
+      "----------------------------------------\n"+
       "Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining\n"+
       "Correct position: #{correct_pos}   Correct colors: #{correct_color}\n"+
       "\n"+
       "Nope... sorry #{player.name} let's try that again\n"+
-      "------------------------------\n"
+      "----------------------------------------\n"
       else
       "\n"+
+      "                                            ----------------------------------------\n"+
       "                                            Guess ##{number_guesses} (#{color_guess(guess)}): #{max_guesses - number_guesses} guesses remaining\n"+
       "                                            Correct position: #{correct_pos}   Correct colors: #{correct_color}\n"+
       "\n"+
       "                                            Nope... sorry #{player.name} let's try that again\n"+
-      "                                            ------------------------------\n"
+      "                                            ----------------------------------------\n"
       end
     end
 
-    def print_win(number_guesses, time)
-      "
-                  *******************************************************
-                     Congraulations! YOU WIN! Code broken in #{number_guesses} guesses
-                            You guessed the code in #{time} seconds!
-                  *******************************************************".colorize(:green)
+    def print_win(number_guesses, time, secret, player)
+      if player.turn_pos == 0
+      "\n"+
+      "******************************\n"+
+      "       CONGRATULATIONS\n"+
+      "******************************\n"+
+      " You guessed the code (#{color_guess(secret)})\n"+
+      "    It took you #{number_guesses} guesses\n"+
+      "       over #{time} seconds!\n"+
+      "******************************\n"
+      else
+      "\n"+
+      "                                            ******************************\n"+
+      "                                                   CONGRATULATIONS\n"+
+      "                                            ******************************\n"+
+      "                                             You guessed the code (#{color_guess(secret)})\n"+
+      "                                                It took you #{number_guesses} guesses\n"+
+      "                                                   over #{time} seconds!\n"+
+      "                                            ******************************\n"
+      end
     end
 
     def color_guess(code)
