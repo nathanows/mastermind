@@ -30,7 +30,7 @@ module Mastermind
     def process_command
       case
       when quit?         then outstream.puts interact.print_farewell
-      when instructions? then outstream.puts interact.print_instructions
+      when instructions? then outstream.puts interact.print_instructions(Mastermind.color_option_string(6))
       when play?         then Mastermind::PlayGame.new(instream, outstream, interact).run
       else                    outstream.puts interact.print_invalid(command)
       end

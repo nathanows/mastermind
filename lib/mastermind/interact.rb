@@ -28,12 +28,12 @@ _/      _/    _/_/_/  _/_/_/        _/_/    _/_/_/  _/        _/    _/    _/  _/
       blank_line +
       "
                            ====================================
-                          |        M4573RM1ND MA1N M3NV        |
+                          |        MASTERMIND MAIN MENU        |
                           | ---------------------------------- |
                           |                                    |
-                          |          (i)NStRUCti0nZ            |
-                          |          (p)1aY the g4M3           |
-                          |          (q)V1t                    |
+                          |          (i)nstructions            |
+                          |          (p)lay                    |
+                          |          (q)uit                    |
                           |                                    |
                            ====================================
       ".colorize(:green) +
@@ -46,12 +46,12 @@ _/      _/    _/_/_/  _/_/_/        _/_/    _/_/_/  _/        _/    _/    _/  _/
       blank_line +
       "
                            ====================================
-                          |        M4573RM1ND 9AM3 0PTZ        |
+                          |        MASTERMIND GAME OPTS        |
                           |------------------------------------|
                           |                                    |
-                          |          (s)1nG1e pl4y0r           |
-                          |          (m)u171 pl4y0r            |
-                          |          (q)V1t                    |
+                          |          (s)ingle player           |
+                          |          (m)ulti player            |
+                          |          (q)uit                    |
                           |                                    |
                            ====================================
       ".colorize(:green) +
@@ -118,9 +118,25 @@ Thanks for playing
       "
     end
 
-    def print_instructions
+    def print_instructions(colors)
       "
-These are the instructions.
+Mastermind is a code breaking game for one or two players.\n\n"+
+"##SINGLE PLAYER##".colorize(:green)+
+"\nIn a single player game, when starting, the computer generates a secret code that you need to
+guess. The code will consist of 4 colors out of a possible 6. The possible colors are:
+#{colors}
+
+The code that you will be guessing will be something like 'RRGB'. Note that duplicate colors 
+may be present in the code.
+
+You will be given 12 guesses to guess the correct answer. If you guess correctly, you will see
+the number of guesses it took you to guess the correct answer along with the amount of
+time that it took you to guess correctly.\n\n"+
+"##MULTI PLAYER##".colorize(:green)+
+"\nIn a multi player game, the game play is the same as single player, but each player chooses
+the code that their opponent must guess. After each player has chosen a secret code, players
+will alternate guessing their code until either, each player finishes, or the players run out
+of guesses.
       "
     end
 
