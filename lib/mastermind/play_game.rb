@@ -29,9 +29,13 @@ module Mastermind
       when command == "S"
         players = player_gen(1)
         Mastermind::GameRound.new(instream, outstream, interact, players).play
+        self.command = "Q"
       when command == "M"
         players = player_gen(2)
         Mastermind::GameRound.new(instream, outstream, interact, players).play
+        self.command = "Q"
+      when command == "I"
+        puts "play-game"
       else                    outstream.puts interact.print_invalid(command)
       end
     end

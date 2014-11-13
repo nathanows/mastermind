@@ -19,10 +19,8 @@ module Mastermind
       @instream     = instream
       @outstream    = outstream
       @interact     = interact
-      @player1_secret = nil
-      @player2_secret = nil
       @valid_colors = Mastermind::Processor.colors(6)
-      @max_guesses  = 2
+      @max_guesses  = 12 
       @command      = ""
       @guesses      = []
       @round_over   = false
