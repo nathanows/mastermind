@@ -17,11 +17,15 @@ module Mastermind
       outstream.puts interact.print_game_info
       outstream.puts interact.print_game_options
       until quit?
-        outstream.print interact.command_prompt
-        self.command = instream.gets.strip.upcase
+        get_command
         process_command
       end
       outstream.puts interact.print_intro
+    end
+
+    def get_command
+      outstream.print interact.command_prompt
+      self.command = instream.gets.strip.upcase
     end
 
     def process_command

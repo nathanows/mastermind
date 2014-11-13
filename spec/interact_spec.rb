@@ -11,15 +11,11 @@ RSpec.describe Mastermind::Interact do
   end
 
   it 'prints an intro title' do
-    expect(@interact.print_title).to include("6MMMMb")
+    expect(@interact.print_title).to include("0;32;49m")
   end
 
   it 'prints the main menu' do
-    expect(@interact.print_intro).to include("(i)nstructions")
-  end
-
-  it 'prints an out of guesses message' do
-    expect(@interact.print_out_of_guesses(["R", "R", "R", "R"])).to include("out of guesses")
+    expect(@interact.print_intro).to include("(i)")
   end
 
   it 'prints an invalid command message' do
@@ -36,16 +32,6 @@ RSpec.describe Mastermind::Interact do
     invalid_cmd = "XXXX"
     expect(@interact.print_invalid_guess(invalid_cmd)).to include("not a valid")
     expect(@interact.print_invalid_guess(invalid_cmd)).to include(invalid_cmd)
-  end
-
-  it 'prints guess stats' do
-    num_guesses = 4
-    cor_pos = 1
-    cor_col = 2
-    max_guesses = 12
-    guess = "RRRR"
-    expect(@interact.print_guess_stats(num_guesses, cor_pos, cor_col, guess, max_guesses))
-      .to include(num_guesses.to_s, cor_pos.to_s, cor_col.to_s)
   end
 
 end

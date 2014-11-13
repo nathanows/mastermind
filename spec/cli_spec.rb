@@ -1,4 +1,6 @@
 require 'mastermind/cli'
+require 'mastermind/play_game'
+require 'mastermind/interact'
 require 'spec_helper'
 require 'stringio'
 
@@ -35,10 +37,10 @@ RSpec.describe Mastermind::CLI do
   end
 
   it "should play the game when prompted" do
-    stdin = StringIO.new("p\nq\nq")
+    stdin = StringIO.new("p\nq\nq\n")
     stdout = StringIO.new()
     cli = Mastermind::CLI.new(stdin, stdout)
     cli.run
-    expect(stdout.string).to include("0PTZ")
+    expect(Mastermind::PlayGame.new(stdin, stdout, Mastermind::Interact.new)).to respond_to(:run)
   end
 end

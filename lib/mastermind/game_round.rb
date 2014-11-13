@@ -13,7 +13,8 @@ module Mastermind
                   :instream,
                   :outstream,
                   :interact,
-                  :start_time
+                  :start_time,
+                  :players
 
     def initialize(instream, outstream, interact, players)
       @instream     = instream
