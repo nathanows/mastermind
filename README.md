@@ -8,7 +8,7 @@ There are both single and multi-player modes. In multi-player mode players creat
 
 To install run:
 
-    $ gem install mastermind
+    $ gem install mastermind-nowsiany
 
 ## Usage
 
