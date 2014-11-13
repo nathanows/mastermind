@@ -4,13 +4,13 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'mastermind/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "mastermind"
+  spec.name          = "mastermind-nowsiany"
   spec.version       = Mastermind::VERSION
   spec.authors       = ["Nathan Owsiany"]
   spec.email         = ["nowsiany@gmail.com"]
   spec.summary       = %q{Command Line Mastermind}
-  spec.description   = %q{Play Mastermind through your command line...}
-  spec.homepage      = ""
+  spec.description   = %q{Play Mastermind through your command line... with multiplayer support.}
+  spec.homepage      = "https://github.com/ndwhtlssthr/mastermind"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_dependency "colorize"
+  spec.add_dependency "colorize", "~> 0.7"
 
   spec.add_development_dependency "bundler", "~> 1.7"
   spec.add_development_dependency "rake", "~> 10.0"
