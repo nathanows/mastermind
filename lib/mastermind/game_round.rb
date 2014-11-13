@@ -38,6 +38,7 @@ module Mastermind
       until round_over? || game_round_over?
         player_turn
       end
+      @round_over = true
     end
 
     def player_reset
@@ -73,7 +74,7 @@ module Mastermind
 
     def get_secret(player)
       outstream.puts interact.print_player_secret_intro(player.name)
-      code = "xxxx"
+      code = "yyyy"
       until valid_guess?(code, player.secret, valid_colors)
         outstream.print interact.secret_guess_prompt
         code = instream.noecho(&:gets).strip.upcase
