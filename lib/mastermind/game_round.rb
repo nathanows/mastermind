@@ -91,7 +91,7 @@ module Mastermind
     def process_command(player)
       case
       when quit?(player)                                               then quit_confirm(player)
-      when !valid_guess?(player.command, player.secret, valid_colors)  then outstream.puts interact.print_invalid_guess(player.command)
+      when !valid_guess?(player.command, player.secret, valid_colors)  then outstream.puts interact.print_invalid_guess(player)
       when valid_guess?(player.command, player.secret, valid_colors)   then guess(player)
       end
     end

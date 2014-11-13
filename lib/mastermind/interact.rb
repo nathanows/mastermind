@@ -191,8 +191,16 @@ Enter your guess in the form of '#{color_guess("RGBY")}':
 Are you sure you want to quit? (y)es/(n)o".colorize(:red)
     end
 
-    def print_invalid_guess(invalid_command)
-"'#{invalid_command}' is not a valid guess, please guess again."
+    def print_invalid_guess(player)
+      if player.turn_pos == 0
+      "\n"+
+      "'#{player.command}' is not a valid guess,\n"+
+      "please guess again."
+      else
+      "\n"+
+      "                                            '#{player.command}' is not a valid guess,\n"+
+      "                                            please guess again."
+      end
     end
 
     def print_guess_stats(number_guesses, correct_pos, correct_color, guess, max_guesses, player)

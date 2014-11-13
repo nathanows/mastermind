@@ -24,7 +24,7 @@ RSpec.describe Mastermind::CLI do
     cli = Mastermind::CLI.new(stdin, stdout)
     cli.run
     expect(stdout.string).to include("0;32;49m")
-    expect(stdout.string).to include("MA1N")
+    expect(stdout.string).to include("MAIN")
     expect(stdout.string).to include("_/")
   end
 

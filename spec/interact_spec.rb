@@ -1,4 +1,5 @@
 require 'mastermind/interact'
+require 'mastermind/player'
 
 RSpec.describe Mastermind::Interact do
   before do
@@ -29,9 +30,8 @@ RSpec.describe Mastermind::Interact do
   end
 
   it 'prints an invalid guess message' do
-    invalid_cmd = "XXXX"
-    expect(@interact.print_invalid_guess(invalid_cmd)).to include("not a valid")
-    expect(@interact.print_invalid_guess(invalid_cmd)).to include(invalid_cmd)
+    player = Mastermind::Player.new("Steve")
+    expect(@interact.print_invalid_guess(player)).to include("not a valid")
   end
 
 end

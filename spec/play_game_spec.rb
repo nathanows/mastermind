@@ -27,7 +27,7 @@ RSpec.describe Mastermind::PlayGame do
     interact = Mastermind::Interact.new
     game = Mastermind::PlayGame.new(stdin, stdout, interact)
     game.run
-    expect(stdout.string).to include("(s)1nG1e")
+    expect(stdout.string).to include("(s)ingle")
   end
 
   it "should generate the specified number of players" do
